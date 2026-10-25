@@ -60,7 +60,7 @@ Redemption is a one-way commitment of `$CHALK` to the currently open epoch. The 
 
 At finalization the Vault provisions queue debt first. If at least one user redeemed, 80% of the residual is assigned to redeemers and 10% to the operator; the remaining 10% stays in the House. A user's share is `their redeemed amount / total redeemed × reward pot`, rounded down. If nobody redeems, the contract does not allocate the 80/10 split for that epoch.
 
-Contract defaults are 14-day epochs and a 48-hour redemption window, but values are configurable. The UAT network JSON in this snapshot overrides these to 2 hours and 30 minutes. Always report the exact active network schedule, its time zone, and the source timestamp. Delayed finalization can skip elapsed epoch ids; never invent a payout date from the default alone.
+Contract defaults are 14-day epochs and a 48-hour redemption window, but values are configurable. The UAT network JSON in this snapshot overrides these to 2 hours and 30 minutes. Always report the exact active network schedule, its time zone, and the source timestamp. Delayed finalization can skip elapsed epoch ids; skipped epochs are not finalized or claimable. Never invent a payout date from the default alone.
 
 ## Safe language
 
