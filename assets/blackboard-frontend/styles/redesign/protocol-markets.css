@@ -1,0 +1,84 @@
+/* Owner: ui-protocol-markets (Markets tab, liquidation heatmap). Tokens and primitives: tokens.css, components.css (read-only here). */
+
+.pm-markets { display: flex; flex-direction: column; gap: var(--page-gap); min-width: 0; margin-top: 8px; }
+.pm-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+.pm-title { margin: 8px 0 0; color: var(--color-text-strong); font: var(--box-title-font); letter-spacing: .06em; text-transform: uppercase; }
+.pm-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--page-gap); }
+
+/* A market: one header line (name, live price, figures), then [heatmap | exposure over 1% PnL]. */
+.pm-market { display: flex; flex-direction: column; gap: var(--page-gap); min-width: 0; }
+/* Market strip: identity and live price, then the figures as label-over-value cells split by hairlines. */
+.pm-market-head {
+  display: grid; grid-template-columns: repeat(5, minmax(120px, 1fr)); align-items: stretch; min-width: 0; overflow-x: auto; scrollbar-width: none;
+  border: 0; border-radius: var(--radius-sm); background: var(--color-box);
+}
+.pm-id { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 12px 16px; border-right: 1px solid var(--color-line-subtle); }
+.pm-id-text { display: flex; flex-direction: column; gap: 4px; }
+.pm-coin { margin: 0; color: var(--color-text-secondary); font: var(--fw-bold) var(--fs-13)/1 var(--font-ui); letter-spacing: .06em; text-transform: uppercase; }
+.pm-price { color: var(--color-text-strong); font: var(--figure-font); }
+.pm-stats { display: contents; }
+.pm-stat { display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 12px 16px; white-space: nowrap; }
+.pm-stat + .pm-stat { border-left: 1px solid var(--color-line-subtle); }
+.pm-stat small { color: var(--color-text-secondary); font-size: var(--fs-14); }
+.pm-stat b { color: var(--color-text-primary); font: var(--figure-font); }
+.pm-market-body { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--page-gap); min-width: 0; }
+.pm-side { display: grid; grid-template-rows: 1fr 1fr; gap: var(--page-gap); min-width: 0; }
+.pm-side > .ui-chart { min-height: 220px; }
+.pm-side .ui-chart-body { min-height: 150px; }
+.pm-chart { padding: 10px 10px 12px 16px; }
+@media (max-width: 1180px) { .pm-market-body { grid-template-columns: minmax(0, 1fr); } .pm-side { grid-template-rows: none; grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .pm-side { grid-template-columns: minmax(0, 1fr); } .pm-market-head { grid-template-columns: repeat(2, minmax(0, 1fr)); } .pm-id { grid-column: 1 / -1; border-right: 0; border-bottom: 1px solid var(--color-border-card); } .pm-stat + .pm-stat { border-left: 0; } }
+
+.pm-chart-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 11px; margin-bottom: 10px; }
+.pm-chart-tools { display: flex; gap: 8px; margin-left: auto; }
+/* Chart title: plain muted text like the other chart titles (no boxed chip). */
+.pm-chip {
+  display: inline-flex; align-items: center; height: var(--control-h-md); margin: 0;
+  color: var(--color-text-strong); font: var(--fw-bold) var(--fs-13)/1 var(--font-ui); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap;
+}
+.pm-dd { height: var(--control-h-md); border: 1px solid var(--color-line-grid); border-radius: var(--radius-sm); background: var(--color-board); transition: var(--transition-control); }
+.pm-dd-btn {
+  display: flex; align-items: center; gap: 9px; height: 100%; padding: 0 var(--space-gap); border: 0; border-radius: inherit; background: none; cursor: pointer;
+  font: var(--fw-bold) var(--fs-12)/1 var(--font-ui); color: var(--color-text-primary); white-space: nowrap; transition: var(--transition-control);
+}
+.pm-dd-btn:active, .pm-dd-btn[aria-expanded='true'] { background: var(--color-board-raised); }
+.pm-dd-k { color: var(--color-text-secondary); font-weight: var(--fw-regular); }
+@media (hover: hover) { .pm-dd:hover { border-color: var(--color-chalk-gray); } }
+
+.pm-heat-scale {
+  display: inline-flex; align-items: center; gap: 6px; color: var(--color-text-secondary);
+  font: var(--fw-regular) var(--fs-11)/1 var(--font-ui); font-variant-numeric: tabular-nums; white-space: nowrap; cursor: help;
+}
+.pm-heat-scale i { display: block; width: 100px; height: 7px; border-radius: var(--radius-hair); box-shadow: inset 0 0 0 1px rgba(var(--color-chalk-white-rgb), .08); }
+
+.pm-chart-body { position: relative; flex: 1; min-height: 320px; }
+.pm-chart-body > .data-notice, .pm-chart-body > .bb-loading { position: absolute; inset: 0; margin: auto; height: fit-content; max-width: 420px; }
+.pm-heat { position: absolute; inset: 0; }
+.pm-heat-host { position: absolute; inset: 0; }
+.pm-heat-host:focus-visible { outline-offset: -2px; }
+.pm-heat-tip {
+  position: absolute; top: 0; left: 0; z-index: var(--z-raised); display: grid; grid-template-columns: auto auto; gap: 4px 16px; min-width: 200px;
+  padding: 8px 10px; border: 1px solid var(--color-line-grid); border-radius: var(--radius-xs); background: var(--color-bg-base);
+  box-shadow: var(--shadow-pop); pointer-events: none;
+}
+.pm-heat-tip[hidden] { display: none; }
+.pm-heat-tip span { color: var(--color-text-secondary); font: var(--fw-bold) var(--fs-10)/1.6 var(--font-ui); letter-spacing: .06em; text-transform: uppercase; }
+.pm-heat-tip b { color: var(--color-text-primary); font: var(--fw-bold) var(--fs-12)/1.35 var(--font-ui); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.pm-heat-msg {
+  position: absolute; left: 50%; top: 45%; transform: translate(-50%, -50%); padding: 6px 12px; border: 1px solid var(--color-line-grid);
+  border-radius: var(--radius-xs); background: var(--color-bg-base); color: var(--color-text-secondary); font-size: var(--fs-12); pointer-events: none;
+}
+
+@media (max-width: 760px) {
+  .pm-chart { padding: 10px 8px 8px 12px; }
+  .pm-chart-body { min-height: 300px; }
+  .pm-chip, .pm-dd { height: var(--control-h-touch); }
+  .pm-heat-scale { margin-left: 0; }
+  .pm-heat-scale i { width: 64px; }
+  .pm-heat-tip { min-width: 0; }
+}
+/* Figures with their 24h change beside them (green up, red down), like the overview strip. */
+.pm-stat-row, .pm-price { display: inline-flex; align-items: baseline; gap: 8px; }
+.pm-change { font: var(--fw-regular) var(--fs-13)/1 var(--font-ui); }
+.pm-stat b.ui-up { color: var(--color-data-up); }
+.pm-stat b.ui-down { color: var(--color-data-down); }

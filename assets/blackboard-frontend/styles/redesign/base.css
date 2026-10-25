@@ -1,0 +1,38 @@
+body {
+  font-family: var(--font-ui);
+  font-feature-settings: normal;
+  font-variant-numeric: tabular-nums;
+}
+:where(:focus-visible) { outline: 2px solid var(--color-chalk-yellow); outline-offset: 2px; }
+::selection { background: rgba(var(--color-chalk-yellow-rgb), .35); color: var(--color-text-strong); }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background: rgba(var(--color-chalk-white-rgb), .1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(var(--color-chalk-white-rgb), .2); }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: transparent; }
+@supports not selector(::-webkit-scrollbar) {
+  * { scrollbar-width: thin; scrollbar-color: rgba(var(--color-chalk-white-rgb), .14) transparent; }
+}
+
+.ui-num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+.ui-display { font-family: var(--font-display); font-weight: 700; line-height: var(--lh-tight); }
+.ui-sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+@keyframes uiFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes uiFadeOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes uiPopIn { from { opacity: 0; transform: translateY(-4px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes uiPopOut { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-4px) scale(.98); } }
+@keyframes uiModalIn { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes uiModalOut { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(8px) scale(.97); } }
+@keyframes uiSheetIn { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes uiSheetOut { from { transform: none; } to { transform: translateY(100%); } }
+@keyframes uiSkelPulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+@keyframes uiSpin { to { transform: rotate(360deg); } }
+@keyframes uiPulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+
+.ui-anim-pop-in { animation: uiPopIn var(--dur-base) var(--ease-out) both; transform-origin: top center; }
+.ui-anim-pop-out { animation: uiPopOut var(--dur-fast) var(--ease-in) both; transform-origin: top center; }
+.ui-anim-sheet-in { animation: uiSheetIn var(--dur-slow) var(--ease-out) both; }
+.ui-anim-sheet-out { animation: uiSheetOut var(--dur-base) var(--ease-in) both; }
+/* Author display rules (e.g. '.x > span { display: flex }') must never reveal a hidden element such as a tooltip's aria copy. */
+[hidden] { display: none !important; }

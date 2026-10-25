@@ -1,0 +1,4 @@
+.release-trade { position: relative; }
+.release-trade button { cursor: default; }
+.release-hint { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); padding: 8px 14px; border: 1px solid var(--border-2); border-radius: 6px; background: var(--panel); color: var(--ink); white-space: nowrap; font: 14px 'Inter', sans-serif; visibility: hidden; }
+.release-hint.visible { visibility: visible; }

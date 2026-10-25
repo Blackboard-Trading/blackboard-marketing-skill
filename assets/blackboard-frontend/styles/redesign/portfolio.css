@@ -1,0 +1,162 @@
+/* Owner: ui-portfolio. Tokens and primitives: tokens.css, components.css (read-only here). */
+
+.pf-shell {
+  display: flex; flex-direction: column; gap: var(--page-gap); min-width: 0; min-height: 100%; padding: var(--page-pad);
+}
+/* Disconnected: a chalk drawing over one line, centred on the page. */
+.pf-shell--out { align-items: center; justify-content: center; gap: 20px; }
+.pf-desk-art.ui-chalk { width: min(260px, 100%); height: auto; opacity: .85; }
+/* After the draw-in: candles bob, the arrow and 1000x glow, stars twinkle. */
+.pf-desk-candle { animation: pfBob 2.8s ease-in-out infinite both; transform-box: fill-box; }
+.pf-desk-glow { animation: pfGlow 3.2s ease-in-out 3.4s infinite; }
+.pf-desk-twinkle { animation: pfTwinkle 2.4s ease-in-out 3.8s infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes pfBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes pfGlow { 0%, 100% { filter: none; } 50% { filter: drop-shadow(0 0 4px rgba(var(--color-chalk-yellow-rgb), .7)); } }
+@keyframes pfTwinkle { 0%, 100% { opacity: 1; transform: scale(1) rotate(0); } 50% { opacity: .35; transform: scale(.8) rotate(18deg); } }
+@media (prefers-reduced-motion: reduce) { .pf-desk-candle, .pf-desk-glow, .pf-desk-twinkle { animation: none; } }
+.pf-out-line { color: var(--color-text-secondary); font-size: var(--fs-14); }
+
+/* Account equity and Your CHALK side by side, the equity chart takes the rest. */
+.pf-hero { display: grid; grid-template-columns: 280px 280px minmax(0, 1fr); grid-template-areas: 'acct side chart'; gap: var(--page-gap); min-width: 0; }
+.pf-account { grid-area: acct; display: flex; flex-direction: column; gap: var(--page-gap); min-width: 0; }
+.pf-side { grid-area: side; display: flex; flex-direction: column; gap: var(--page-gap); min-width: 0; }
+.pf-side > :only-child { flex: 1; }
+.pf-chart { grid-area: chart; }
+
+.pf-headline { margin-bottom: 12px; color: var(--color-text-primary); font: var(--figure-font); white-space: nowrap; }
+.pf-actions { display: flex; gap: 14px; margin-top: 21px; }
+.pf-actions > * { flex: 1 1 0; min-width: 0; }
+.pf-stats { min-height: 79px; }
+
+.pf-chart { position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 0; border-radius: var(--radius-sm); border: 0; background: var(--color-box); }
+.pf-chart-head { position: absolute; z-index: var(--z-raised); top: 9px; left: 14px; right: 14px; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; pointer-events: none; }
+.pf-chart-head > *, .pf-chart-tools > * { pointer-events: auto; }
+/* Clears the chart's right price scale, only when a chart is drawn. */
+.pf-chart-tools { display: flex; align-items: center; gap: 8px; }
+.pf-chart-body { position: relative; flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: 0; padding-top: 48px; }
+.pf-chart-canvas { position: relative; isolation: isolate; flex: 1; min-height: 0; }
+.pf-chart-body > .data-notice { margin: 12px; }
+
+.pf-pick {
+  display: inline-flex; align-items: center; gap: 9px; height: 32px; padding: 0 10px; border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-sm); background: var(--color-board); color: var(--color-text-primary); cursor: pointer;
+  font: var(--fw-regular) var(--fs-12)/1 var(--font-ui); white-space: nowrap; transition: var(--transition-control);
+}
+div.pf-pick { height: 29px; padding: 0 10px 0 0; cursor: default; }
+.pf-pick b { font-weight: var(--fw-bold); }
+.pf-pick-menu { display: flex; align-self: stretch; }
+.pf-pick-btn { display: inline-flex; align-items: center; gap: 9px; height: 100%; padding: 0 0 0 10px; border: 0; background: none; color: inherit; font: inherit; text-transform: inherit; cursor: pointer; }
+.pf-pick-sep { width: 1px; height: 10px; background: var(--color-line-divider); }
+.pf-pick-value { font-size: var(--fs-16); font-weight: var(--fw-bold); text-transform: none; }
+button.pf-pick:active { background: var(--color-bg-base); }
+.pf-pick:has(.pf-pick-btn:active) { background: var(--color-bg-base); }
+.pf-pick:disabled { color: var(--color-text-faint); cursor: default; }
+@media (hover: hover) {
+  button.pf-pick:hover { border-color: var(--color-chalk-gray); }
+  .pf-pick:has(.pf-pick-btn:hover) { border-color: var(--color-chalk-gray); }
+}
+
+
+.pf-activity { display: flex; flex-direction: column; min-width: 0; flex: 1; padding: 8px 8px 8px; border-radius: var(--radius-sm); background: var(--color-box); }
+.pf-tabs-line { padding: 0 8px 8px; border-bottom: 1px solid var(--color-line-subtle); }
+.pf-panel { min-width: 0; padding-top: 10px; }
+.pf-panel > .data-notice { margin: 12px 0; }
+.pf-empty-inline { display: inline-flex; align-items: baseline; gap: 8px; }
+
+.pf-table { min-width: 640px; }
+.pf-tx { display: inline-flex; align-items: center; justify-content: flex-end; gap: 4px; color: var(--color-text-secondary); text-decoration: none; vertical-align: middle; transition: var(--transition-control); }
+.pf-tx-hash { display: inline-flex; align-items: center; gap: 4px; color: var(--color-text-secondary); white-space: nowrap; }
+.pf-tx:active { color: var(--color-chalk-yellow-deep); }
+@media (hover: hover) { .pf-tx:hover { color: var(--color-chalk-yellow); } }
+
+.pf-mob { display: none; }
+.pf-mlist { margin: 0; padding: 0; list-style: none; }
+.pf-mlist li { display: flex; flex-direction: column; gap: 8px; margin-bottom: 2px; padding: 12px 14px; border-radius: var(--radius-sm); background: var(--color-board); font-size: var(--fs-13); }
+.pf-mlist-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.pf-mlist-top b { white-space: nowrap; }
+
+@media (max-width: 1180px) {
+  .pf-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: 'acct side' 'chart chart'; }
+  .pf-chart { min-height: 340px; }
+  .pf-tabs-bar { flex-wrap: wrap; row-gap: 8px; }
+}
+
+@media (max-width: 760px) {
+  .pf-hero { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'acct' 'side' 'chart'; }
+  .pf-chart { min-height: 300px; }
+  .pf-chart-head { position: static; flex-wrap: wrap; padding: 9px 10px 0; }
+  .pf-chart-tools { margin: 0 0 0 auto; }
+  .pf-pick, div.pf-pick { height: 40px; }
+  .pf-chart-body { padding-top: 8px; }
+  .pf-tx { min-height: 40px; }
+  .pf-desk { display: none; }
+  .pf-mob { display: block; }
+}
+
+/* Referral dashboard (/referral): same shell as Portfolio. */
+.rf-shell { display: flex; flex-direction: column; gap: var(--page-gap); min-width: 0; min-height: 100%; padding: var(--page-pad); }
+.rf-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 6px 16px; }
+.rf-title { margin: 0; color: var(--color-text-strong); font: var(--box-title-font); letter-spacing: .06em; text-transform: uppercase; }
+.rf-invited { margin: 0; color: var(--color-text-secondary); font-size: var(--fs-14); }
+.rf-invited b { color: var(--color-text-primary); }
+.rf-invited .bb-link { margin-left: 10px; }
+.rf-hero {
+  position: relative; display: flex; align-items: center; gap: 32px; padding: 28px 32px; overflow: hidden;
+  border: var(--stroke-card) solid rgba(var(--color-chalk-yellow-rgb), .35); border-radius: var(--radius-sm);
+  background: radial-gradient(120% 140% at 0% 0%, rgba(var(--color-chalk-yellow-rgb), .07), transparent 55%), var(--color-board);
+}
+.rf-hero-main { flex: 1; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.rf-hero-title { margin: 0; color: var(--color-text-strong); font-size: 32px; line-height: 1.1; }
+.rf-hero-sub { margin: 0; color: var(--color-text-secondary); font-size: var(--fs-14); }
+.rf-codebox { display: flex; flex-direction: column; gap: 6px; }
+.rf-label { color: var(--color-text-secondary); font-size: var(--fs-13); }
+.rf-code-row { display: inline-flex; align-items: center; gap: 10px; }
+.rf-code { color: var(--color-chalk-yellow); font-size: 44px; line-height: 1; letter-spacing: .04em; overflow-wrap: anywhere; }
+.rf-linkrow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.rf-link { flex: 1 1 280px; max-width: 460px; height: var(--control-h-md, 36px); display: flex; align-items: center; padding: 0 12px; overflow: hidden; border: 1px dashed var(--color-line-grid); border-radius: var(--radius-xs); color: var(--color-text-primary); font-size: var(--fs-13); text-overflow: ellipsis; white-space: nowrap; }
+.rf-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 8px 0 0; padding: 16px 0 0; border-top: 1px dashed var(--color-line-grid); list-style: none; }
+.rf-step { display: flex; align-items: flex-start; gap: 12px; min-width: 0; }
+.rf-step-n { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border: 1.5px solid var(--color-chalk-yellow); border-radius: 50%; color: var(--color-chalk-yellow); font-size: 20px; }
+.rf-step > span:last-child { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.rf-step b { color: var(--color-text-primary); font-size: var(--fs-14); }
+.rf-step small { color: var(--color-text-secondary); font-size: var(--fs-12); }
+.rf-qr { flex: none; display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 0; padding: 12px; border-radius: var(--radius-sm); background: rgba(var(--color-chalk-white-rgb), .04); transform: rotate(2deg); }
+.rf-qr svg { display: block; width: 148px; height: 148px; border-radius: var(--radius-xs); }
+.rf-qr figcaption { color: var(--color-text-secondary); font: var(--fw-regular) var(--fs-14)/1 var(--font-hand); }
+.rf-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--page-gap); }
+.rf-wallets .ui-card-title { display: inline-flex; align-items: center; gap: 8px; }
+.rf-addr { display: inline-flex; align-items: center; gap: 4px; }
+.rf-addr a { color: inherit; text-decoration: none; }
+.rf-mob { display: none; }
+.rf-mlist { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.rf-mlist li { display: flex; flex-direction: column; gap: 6px; padding: 10px 12px; border-radius: var(--radius-sm); background: var(--color-board); }
+.rf-mlist-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.rf-mlist-kv { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: var(--fs-13); }
+.rf-mlist-kv small { margin-right: 4px; color: var(--color-text-secondary); }
+@media (max-width: 760px) {
+  
+  .rf-hero { flex-direction: column; align-items: stretch; padding: 18px 16px; }
+  .rf-hero-title { font-size: 24px; }
+  .rf-code { font-size: 34px; }
+  .rf-qr { align-self: center; }
+  .rf-steps, .rf-stats { grid-template-columns: minmax(0, 1fr); }
+  .rf-desk { display: none; }
+  .rf-mob { display: flex; }
+}
+/* Your CHALK: its shortcuts sit at the foot like Withdraw / Deposit, so the two cards line up. */
+.pf-card--chalk { display: flex; flex-direction: column; }
+.pf-actions--3 { margin-top: auto; padding-top: 16px; }
+.pf-account > .pf-card { flex: 1; display: flex; flex-direction: column; }
+.pf-account .pf-actions { margin-top: auto; padding-top: 16px; }
+/* Card heads line up whether or not they carry an action button. */
+.pf-hero .ui-card-head { min-height: 26px; align-items: center; }
+.pf-hero .ui-rows { gap: 8px; }
+/* The chart takes the cards' height (the stacked layouts below 1180px set their own floor). */
+.pf-chart .pf-chart-body { min-height: 200px; }
+/* 24h change beside a headline figure, and a PnL's % of the margin: green up, red down. */
+/* Headline and its 24h change on one baseline, never wrapping: the rolling digits are inline-flex, so both sides align
+   their own children on the baseline too (otherwise "(24h)" rides up beside the rolling %). */
+.pf-headline { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.pf-change { display: inline-flex; align-items: baseline; gap: 4px; flex: none; font: var(--fw-regular) var(--fs-13)/1 var(--font-ui); }
+.pf-change > small { color: var(--color-text-secondary); font-size: inherit; }
+.pf-kv-pct { font-size: var(--fs-12); }

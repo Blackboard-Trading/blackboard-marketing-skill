@@ -1,0 +1,111 @@
+/* Original Blackboard visual values adapted to the v2 components.
+   Source: blackboard/web/src/styles/app.css. No protocol or data changes. */
+:root {
+  --page: #1b1d1e;
+  --page-rgb: 27, 29, 30;
+  --header: #212425;
+  --panel: #212425;
+  --raised: #2a2e30;
+  --raised-2: #33383a;
+  --sunken: #161818;
+  --border: rgba(239, 238, 230, .16);
+  --border-2: rgba(239, 238, 230, .26);
+  --chalk-line: rgba(239, 238, 230, .22);
+  --ink: #efeee6;
+  --ink-rgb: 239, 238, 230;
+  --ink-2: #d6dadb;
+  --muted: #b3b8b9;
+  --faint: #8f9597;
+  --pos: #8ff0b0;
+  --pos-rgb: 143, 240, 176;
+  --pos-text: #8ff0b0;
+  --pos-ink: #10261a;
+  --neg: #ff8f9f;
+  --neg-rgb: 255, 143, 159;
+  --neg-text: #ffa0ad;
+  --neg-ink: #2a0e14;
+  --accent: #9fd3ff;
+  --accent-rgb: 159, 211, 255;
+  --accent-hover: #c2e3ff;
+  --accent-ink: #11202b;
+  --link: #9fd3ff;
+  --orange: #ffb070;
+  --warn: #ffc46b;
+  --warn-rgb: 255, 196, 107;
+  --wood: #141617;
+  --wood-2: #0d0e0f;
+  --wood-edge: #000000;
+  --wood-ink: #c9cdce;
+  --radius: 8px;
+  --r-md: 6px;
+  --r-sm: 4px;
+  --gutter: 3px;
+  --font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-chalk: 'Cabin Sketch', 'Patrick Hand', 'Comic Sans MS', cursive;
+  --font-hand: 'Patrick Hand', 'Kalam', 'Comic Sans MS', cursive;
+  color-scheme: dark;
+}
+/* ---------- header: original Blackboard frame and typography ---------- */
+.bb-header {
+  height: 44px; min-height: 44px; gap: 0 16px; padding: 0 20px;
+  background: linear-gradient(180deg, var(--wood) 0, var(--wood-2) 100%);
+  border-bottom: 1px solid var(--wood-edge);
+  box-shadow: inset 0 -1px 0 rgba(239, 238, 230, .07), 0 3px 8px rgba(0, 0, 0, .45);
+}
+.bb-header .bb-brand {
+  flex: none; font-size: 23px; letter-spacing: 0;
+  text-shadow: 0 0 1px rgba(255, 255, 255, .7), 0 0 10px rgba(239, 238, 230, .25);
+}
+@media (min-width: 761px) and (max-width: 1023px) {
+  .bb-header { gap: 0 10px; padding: 0 16px; }
+  .bb-header .bb-brand { font-size: 22px; }
+}
+@media (max-width: 760px) {
+  .bb-header { height: 52px; min-height: 52px; gap: 0 12px; padding: 0 16px; }
+  .bb-header .bb-brand { font-size: 22px; }
+}
+
+/* Match the original frame, compact cards, typography and chalk surfaces. */
+body { border-top: 3px solid var(--wood-2); }
+.app { height: calc(100dvh - 3px); }
+.hero .sub .g { color: var(--ink); font-weight: 700; }
+.bb-page { max-width: none; width: 100%; padding: 3px; gap: 3px; }
+.bb-page > * { min-width: 0; }
+.bb-title-row { margin: 0; padding: 5px 12px; min-height: 28px; gap: 8px; }
+.bb-h1 { font: 400 16px var(--font-hand); line-height: 1.2; }
+.bb-h2 { margin: 0; padding: 6px 12px 3px; font: 400 15px var(--font-hand); }
+.bb-grid { gap: 3px; }
+.bb-grid > * { min-width: 0; }
+.bb-panel {
+  border-radius: var(--radius); background: var(--panel);
+  border: 1px solid var(--border); box-shadow: inset 0 0 0 1px rgba(var(--ink-rgb), .025);
+}
+.bb-panel { padding: 10px 12px; gap: 8px; }
+.bb-table { font-size: 12px; }
+.bb-table th { padding: 8px 12px; font-size: 10.5px; letter-spacing: .08em; }
+.bb-table td { padding: 7px 12px; font-size: 12px; }
+.bb-table thead tr { background: rgba(var(--ink-rgb), .02); }
+.bb-table th, .bb-table td { border-color: var(--border); }
+.bb-btn { height: 30px; min-height: 30px; padding: 0 10px; font-size: 11.5px; border-radius: 4px; }
+.bb-btn.primary, .bb-btn.primary:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+/* The original muted coin badges and compact numeric ledger. */
+.coinic { background: radial-gradient(circle at 35% 30%, #355a46, #213a2e) !important; color: rgba(var(--ink-rgb), .82) !important; }
+.coinic.btc { background: radial-gradient(circle at 35% 30%, #4d4a2a, #2b3322) !important; color: #f3d77a !important; }
+.coinic.eth { background: radial-gradient(circle at 35% 30%, #34485a, #223240) !important; color: #c4d0f4 !important; }
+
+/* Original House and CHALK dashboard organization, with v2-only detail retained. */
+.bb-paneltop > .bb-h2, .bb-panel > .bb-h2 { font: 400 15px/1 var(--font-hand); text-transform: uppercase; letter-spacing: .05em; padding: 0; }
+/* Summary stays on one line (the chevron must not drop when the scrollbar takes width); only the PnL number gives way, its tone arrow stays. */
+.bb-tag.lg { font-size: 10px; padding: 3px 7px; }
+
+/* Preserve v2's usable phone layout rather than the old clipped desktop grid. */
+@media (max-width: 760px) {
+  .bb-page { padding: 3px 3px calc(72px + env(safe-area-inset-bottom, 0px)); gap: 3px; }
+  .bb-title-row { padding: 8px; flex-wrap: wrap; }
+  .bb-h1 { font-size: 18px; }
+  .bb-panel { padding: 12px; }
+  .bb-grid.cols3 { grid-template-columns: 1fr; }
+  .bb-page .bb-btn { min-height: 40px; }
+}

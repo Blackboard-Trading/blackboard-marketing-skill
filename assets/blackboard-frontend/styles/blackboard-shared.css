@@ -1,0 +1,9 @@
+/* Shared original Blackboard tabstrip/table treatment (app.css reference).
+   No per-page rounded tab boxes; original 11px UI labels and chalk underline. */
+.app-main:has(.bb-trade, .bb-page, .bb-portfolio-original, .bb-house-original, .bb-staking-original) { background: var(--page); }
+/* Match original .tbl headings; never put ledger column labels in chalk type. */
+.bb-table th {
+  background: var(--raised); color: var(--muted);
+  font: 600 10.5px/1.35 var(--font-ui); letter-spacing: .07em;
+  text-transform: uppercase; padding: 9px 10px;
+}

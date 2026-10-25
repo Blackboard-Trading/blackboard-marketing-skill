@@ -1,0 +1,184 @@
+/* Legacy names at the end alias the tokens so older selectors follow the same theme. Spec: frontend/DESIGN.md */
+:root {
+  /* One page container for every screen (Portfolio, Protocol, CHALK, Leaderboard, Referral): tight gutter, boxes 6px apart. */
+  --page-x: 8px;
+  --page-pad: var(--page-x);
+  --page-gap: 6px;
+  --color-page: #151718;
+  --color-bg-base: #1a1c1d;
+  --color-board: #191c1d;
+  --color-board-raised: #333336;
+  --color-board-sunken: #131314;
+  /* Box fill: a step under the page, no border (CHALK page and the header). */
+  --color-box: #212324;
+  --color-overlay: rgba(4, 4, 5, .45);
+
+  --color-chalk-white: #f2f0e6;
+  --color-chalk-white-rgb: 242, 240, 230;
+  --color-chalk-gray: #85857e;
+  --color-chalk-yellow: #ffb100;
+  --color-chalk-yellow-rgb: 255, 177, 0;
+  --color-chalk-yellow-hover: #ffc540;
+  --color-chalk-yellow-deep: #b07a00;
+
+  --color-text-primary: #f2f0e6;
+  --color-text-secondary: #85857e;
+  --color-text-strong: #ffffff;
+  --color-text-faint: #808079;
+  --color-text-on-yellow: #201e16;
+  --color-text-on-data: #161412;
+
+  --color-line-grid: #414141;
+  --color-line-input: #2e2e2e;
+  --color-line-field: #5c5c5c;
+  --color-line-control: #48484d;
+  --color-line-divider: rgba(242, 240, 230, .3);
+  --color-line-subtle: rgba(242, 240, 230, .1);
+  --color-line-row: rgba(31, 32, 36, .5);
+  --color-border-card: rgba(65, 65, 65, .5);
+  --color-line-zero: #6e7072;
+  --color-row-hover: #232325;
+  --color-cell-input: #17181b;
+  --color-icon-idle: #74746e;
+  --color-coin-mute: #3a3a38;
+  --color-coin-mute-ink: #b9b8b0;
+  --color-pill-glass: rgba(23, 24, 26, .94);
+  --color-banner-pending: #2a2214;
+  --color-banner-pending-ink: #f6dca8;
+
+  --color-data-up: #8ff0b0;
+  --color-data-up-rgb: 143, 240, 176;
+  --color-side-long: #7bb58d;
+  --color-side-long-ink: #002617;
+  --color-data-down: #ed776a;
+  --color-data-down-rgb: 237, 119, 106;
+  --color-live: #7bb58d;
+  --color-live-rgb: 123, 181, 141;
+  --color-warning: #ff7b00;
+  --color-warning-rgb: 255, 123, 0;
+  --color-error: #ed776a;
+
+  --font-ui: 'Lato', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-num: 'Lato', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Cabin Sketch', 'Patrick Hand', 'Comic Sans MS', cursive;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-chalk: var(--font-display);
+  --font-hand: 'Patrick Hand', 'Kalam', 'Comic Sans MS', cursive;
+
+  --fs-10: 10px;
+  --fs-11: 11px;
+  --fs-12: 12px;
+  --fs-13: 13px;
+  --fs-14: 14px;
+  --fs-16: 16px;
+  --fs-18: 18px;
+  --fs-20: 20px;
+  --fs-24: 24px;
+  /* One type scale for every box: headline figure, the label over it, the box title. */
+  --figure-font: var(--fw-bold) var(--fs-24)/1.1 var(--font-display);
+  --figure-sub-font: var(--fw-bold) var(--fs-16)/1.1 var(--font-display);
+  --box-title-font: var(--fw-bold) var(--fs-13)/1.2 var(--font-ui);
+  --fw-regular: 400;
+  --fw-bold: 700;
+  --lh-tight: 1.2;
+  --lh-body: 1.35;
+  --lh-table: 1.5;
+
+  --space-gap: 10px;
+
+  --radius-hair: 1px;
+  --radius-xs: 2px;
+  --radius-tick: 3px;
+  --radius-sm: 4px;
+  --radius-chip: 5px;
+  --radius-md: 6px;
+  --radius-sheet: 12px;
+  --radius-round: 999px;
+  --stroke-card: 1px;
+
+  --control-h-sm: 24px;
+  --control-h-md: 32px;
+  --control-h-lg: 42px;
+  --control-h-touch: 40px;
+  --tabbar-h: 56px;
+
+  --shadow-pop: 0 5px 7px rgba(0, 0, 0, .55);
+  --shadow-focus: 0 0 0 2px var(--color-page), 0 0 0 4px var(--color-chalk-yellow);
+
+  --z-raised: 2;
+  --z-sticky: 20;
+  --z-header: 60;
+  --z-tabbar: 70;
+  --z-dropdown: 100;
+  --z-overlay: 200;
+  --z-modal: 210;
+  --z-popover: 220;
+  --z-tooltip: 900;
+
+  --dur-fast: 120ms;
+  --dur-base: 180ms;
+  --dur-slow: 260ms;
+  --dur-collapse: 220ms;
+  --dur-roll: 420ms;
+  --ease-standard: cubic-bezier(.2, 0, 0, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-in: cubic-bezier(.4, 0, 1, 1);
+  --ease-spring: cubic-bezier(.34, 1.4, .64, 1);
+  --transition-control: color var(--dur-fast) var(--ease-standard), background-color var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard), opacity var(--dur-fast) var(--ease-standard);
+
+  --chalk-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.6 1.05'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  --page: var(--color-page);
+  --page-rgb: 21, 23, 24;
+  --header: var(--color-page);
+  --panel: var(--color-bg-base);
+  --raised: var(--color-board);
+  --raised-2: var(--color-board-raised);
+  --sunken: var(--color-board-sunken);
+  --border: var(--color-line-subtle);
+  --border-2: var(--color-line-divider);
+  --chalk-line: var(--color-line-divider);
+  --ink: var(--color-text-primary);
+  --ink-rgb: var(--color-chalk-white-rgb);
+  --ink-2: #d9d7cd;
+  --muted: var(--color-text-secondary);
+  --faint: var(--color-text-faint);
+  --pos: var(--color-data-up);
+  --pos-rgb: var(--color-data-up-rgb);
+  --pos-text: var(--color-data-up);
+  --pos-ink: var(--color-text-on-data);
+  --pos-hover: #93c6a3;
+  --neg: var(--color-data-down);
+  --neg-rgb: var(--color-data-down-rgb);
+  --neg-text: var(--color-data-down);
+  --neg-ink: var(--color-text-on-data);
+  --neg-hover: #f29186;
+  --accent: var(--color-chalk-yellow);
+  --accent-rgb: var(--color-chalk-yellow-rgb);
+  --accent-hover: var(--color-chalk-yellow-hover);
+  --accent-ink: var(--color-text-on-yellow);
+  --link: var(--color-chalk-yellow);
+  --orange: var(--color-warning);
+  --warn: var(--color-warning);
+  --warn-rgb: var(--color-warning-rgb);
+  --radius: var(--radius-sm);
+  --r-md: var(--radius-sm);
+  --r-sm: var(--radius-xs);
+  --pop-bg: var(--color-bg-base);
+  --pop-border: var(--color-line-grid);
+  --pop-radius: var(--radius-xs);
+  --pop-shadow: var(--shadow-pop);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+    --dur-collapse: 0ms;
+    --dur-roll: 0ms;
+  }
+}
+
+@media (max-width: 760px) { :root { --page-x: 8px; --page-pad: var(--page-x); --page-gap: 6px; } }

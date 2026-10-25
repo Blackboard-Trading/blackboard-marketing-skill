@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+<defs>
+<path id="s" d="M15.32 7.34L8.68 10.66M8.68 13.34L15.32 16.66M21 6a3 3 0 1 1-6 0a3 3 0 1 1 6 0M9 12a3 3 0 1 1-6 0a3 3 0 1 1 6 0M21 18a3 3 0 1 1-6 0a3 3 0 1 1 6 0"/>
+<filter id="r" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale=".3"/></filter>
+<mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+<rect width="24" height="24" fill="#fff"/>
+<use href="#s" stroke="#000" stroke-width=".42" stroke-linecap="round" stroke-dasharray=".28 1.9 .18 2.7 .34 3.3" stroke-dashoffset=".6"/>
+<use href="#s" stroke="#8a8a8a" stroke-width=".5" stroke-linecap="round" stroke-dasharray=".22 2.4 .36 1.8 .2 3" stroke-dashoffset="1.7"/>
+</mask>
+</defs>
+<g filter="url(#r)"><use href="#s" stroke="#fff" stroke-width="1.7" stroke-linecap="round" mask="url(#m)"/></g>
+</svg>

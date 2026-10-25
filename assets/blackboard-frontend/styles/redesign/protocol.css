@@ -1,0 +1,100 @@
+.pr-page { display: flex; flex-direction: column; padding: var(--page-pad); min-width: 0; }
+
+/* Overview strip (same as the CHALK strip): one bordered band, cells split by 1px hairlines (the gap shows the line colour),
+ *  then a dashed rule before the house. */
+.pr-overview {
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; overflow: hidden; margin-bottom: var(--page-gap);
+  border: 0; border-radius: var(--radius-sm); background: var(--color-box);
+}
+.pr-overview > .pr-metric { justify-content: flex-start; min-height: 0; gap: 8px; padding: 14px 16px 16px; border: 0; border-radius: 0; background: none; }
+.pr-overview > .pr-metric + .pr-metric { border-left: 1px solid var(--color-line-subtle); }
+.pr-overview .pr-metric-label { font-size: var(--fs-14); line-height: 1.2; }
+.pr-overview .pr-metric-value { line-height: 1.1; }
+/* One line: the value left, the 24h change right (same as the CHALK strip's sub-figure). */
+.pr-overview .pr-metric-row { flex-wrap: nowrap; justify-content: space-between; align-items: baseline; gap: 8px; }
+.pr-overview .pr-metric-value { flex: none; overflow: visible; }
+.pr-overview .pr-metric-change { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pr-overview + .pr-tab { padding-top: 0; }
+.pr-metric {
+  display: flex; flex-direction: column; justify-content: center; gap: 12px; min-width: 0; min-height: 90px; padding: 14px 16px 16px;
+  border: 0; border-radius: var(--radius-sm); background: var(--color-box);
+}
+.pr-metric-label { color: var(--color-text-secondary); font-size: var(--fs-14); }
+.pr-metric-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 8px; min-width: 0; }
+.pr-metric-value { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--color-text-primary); font: var(--figure-font); }
+.pr-metric-value.ui-up { color: var(--color-data-up); }
+.pr-metric-change { flex: none; color: var(--color-text-secondary); font-size: var(--fs-12); }
+
+
+
+
+.pr-tab { display: flex; flex-direction: column; gap: var(--page-gap); min-width: 0; animation: uiFadeIn var(--dur-base) var(--ease-out); }
+.pr-notices { display: flex; flex-direction: column; gap: 8px; }
+.pr-notices:empty { display: none; }
+.pr-accent { color: var(--color-chalk-yellow); }
+.pr-stale { display: flex; align-items: center; gap: 12px; }
+.pr-stale-notice { flex: 1; min-width: 0; }
+.pr-stale-age { flex: none; min-width: 16ch; color: var(--color-warning); font-size: var(--fs-12); font-variant-numeric: tabular-nums; text-align: right; }
+
+.pr-rows--loose { gap: 16px; }
+.pr-divider { margin: 22px -16px 20px -17px; border: 0; border-top: 1px dashed var(--color-line-divider); }
+.pr-card-title { margin: 0 0 12px; font: var(--fw-bold) var(--fs-18)/var(--lh-tight) var(--font-ui); color: var(--color-text-strong); }
+.pr-divider + .pr-card-title { margin-bottom: 17px; }
+
+/* [house | chart], [queue | placement | queue chart], [exposure | 1% PnL], markets. */
+.pr-all { gap: var(--page-gap); }
+.pr-top, .pr-queue-row { display: grid; gap: var(--page-gap); align-items: stretch; }
+.pr-top { grid-template-columns: minmax(300px, 360px) minmax(0, 1fr); }
+.pr-queue-row { grid-template-columns: minmax(300px, 360px) minmax(0, 1fr); }
+.pr-queue-box { display: flex; flex-direction: column; }
+.pr-queue-body { flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; }
+.pr-queue-body .pr-ring { height: 136px; }
+.pr-queue-body .pr-ring-cap { margin: -6px 0 0; text-align: center; }
+.pr-top > .ui-chart { min-height: 340px; }
+/* House cap row: the % sits after the amount, a hairline bar under the row shows how full the house is. */
+.pr-cap-row { display: flex; flex-direction: column; gap: 6px; }
+.pr-cap-meter { display: flex; align-items: center; gap: 10px; }
+.pr-cap-ticks { flex: 1; display: flex; justify-content: space-between; height: 12px; }
+.pr-cap-ticks > i { width: 3px; border-radius: 2px; background: var(--color-line-grid); transition: background var(--dur-base) var(--ease-out); }
+.pr-cap-ticks > i.on { background: var(--color-chalk-yellow); }
+.pr-cap-ticks.is-full > i.on { background: var(--color-data-up); }
+.pr-cap-pct { flex: none; min-width: 4ch; color: var(--color-text-secondary); font-size: var(--fs-12); text-align: right; }
+.ui-pnl-curve { position: absolute; inset: 0 12px 8px; }
+
+.pr-box { min-width: 0; padding: 8px 16px 16px; border-radius: var(--radius-sm); border: 0; background: var(--color-box); }
+.pr-house { padding: 8px 16px 16px; }
+/* Box titles match chart titles: same size, and centred on the same line as a chart's first row. */
+.pr-box-title.ui-eyebrow { color: var(--color-text-strong); margin-bottom: 10px; font-size: var(--fs-13); line-height: var(--control-h-md); }
+.pr-box-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.pr-box-head > .pr-box-title.ui-eyebrow { margin-bottom: 0; }
+.pr-queue-place { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.pr-queue-place .pr-box-title { align-self: flex-start; margin-bottom: 8px; }
+.pr-ring { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 132px; }
+.pr-ring-empty { color: var(--color-text-secondary); font-size: var(--fs-12); }
+.pr-ring-cap { margin: 8px 0 0; color: var(--color-text-secondary); font-size: var(--fs-11); line-height: var(--lh-body); }
+.pr-ring-note { margin: 4px 0 0; color: var(--color-text-faint); font-size: var(--fs-11); line-height: var(--lh-body); }
+
+.pr-section { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.pr-section-title { margin: 0; color: var(--color-text-strong); font: var(--box-title-font); letter-spacing: .06em; text-transform: uppercase; }
+
+@media (max-width: 1180px) {
+  
+  .pr-overview { grid-template-columns: repeat(6, minmax(0, 1fr)); margin-bottom: 16px; }
+  .pr-metric { grid-column: span 2; }
+  .pr-metric:nth-child(-n + 2) { grid-column: span 3; }
+  .pr-top, .pr-queue-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pr-top > .ui-chart, .pr-queue-row > .ui-chart { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .pr-stale { flex-direction: column; align-items: stretch; gap: 4px; }
+  .pr-stale-age { align-self: flex-end; }
+  .pr-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pr-metric, .pr-metric:nth-child(-n + 2), .pr-metric:last-child { grid-column: 1 / -1; }
+  .pr-metric:nth-child(3), .pr-metric:nth-child(4) { grid-column: span 1; }
+  .pr-overview > .pr-metric { padding: 10px 12px 12px; }
+  .pr-metric-label { font-size: var(--fs-13); }
+  .pr-metric-value { font-size: var(--fs-20); }
+  .pr-top, .pr-queue-row { grid-template-columns: minmax(0, 1fr); gap: var(--page-gap); }
+  .pr-top > .ui-chart { min-height: 300px; }
+  /* three tabs fit at 390 with a right gutter; scrolls if they ever don't */
+}

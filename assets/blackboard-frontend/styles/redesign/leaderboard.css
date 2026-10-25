@@ -1,0 +1,69 @@
+/* Owner: ui-leaderboard. Tokens and primitives: tokens.css, components.css (read-only here). */
+
+.lb-shell { display: flex; flex-direction: column; gap: var(--page-gap); min-width: 0; min-height: 100%; padding: var(--page-pad); }
+
+.lb-card { display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: 12px; border-radius: var(--radius-sm); border: 0; background: var(--color-box); }
+/* The previous range's rows stay while the new one loads, faded so they never read as the answer. */
+.lb-card :is(.lb-desk, .lb-mob, .lb-foot) { transition: opacity var(--dur-base) var(--ease-standard); }
+.lb-card.is-held :is(.lb-desk, .lb-mob, .lb-foot) { opacity: .45; }
+.lb-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.lb-search { width: 260px; }
+.lb-search input { font-size: var(--fs-13); }
+.lb-rankby { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-12); }
+.lb-pager { display: inline-flex; align-items: center; gap: 10px; margin-left: auto; color: var(--color-text-secondary); font-size: var(--fs-12); }
+
+.lb-table { min-width: 880px; }
+.lb-table .lb-rank-col { width: 44px; padding-right: 0; }
+/* Only the top five are tinted, fading from #1 to #5; the rest sit on the board colour. "You" stays a label. */
+.lb-table tbody tr > td { background: transparent; }
+.lb-table tbody tr[data-top='1'] > td, .lb-mlist li[data-top='1'] { background: rgba(var(--color-chalk-yellow-rgb), .10); }
+.lb-table tbody tr[data-top='2'] > td, .lb-mlist li[data-top='2'] { background: rgba(var(--color-chalk-yellow-rgb), .075); }
+.lb-table tbody tr[data-top='3'] > td, .lb-mlist li[data-top='3'] { background: rgba(var(--color-chalk-yellow-rgb), .055); }
+.lb-table tbody tr[data-top='4'] > td, .lb-mlist li[data-top='4'] { background: rgba(var(--color-chalk-yellow-rgb), .035); }
+.lb-table tbody tr[data-top='5'] > td, .lb-mlist li[data-top='5'] { background: rgba(var(--color-chalk-yellow-rgb), .02); }
+.lb-who { display: inline-flex; align-items: center; gap: 8px; min-width: 0; max-width: 220px; }
+.lb-who-name { overflow: hidden; text-overflow: ellipsis; color: var(--color-text-strong); font-weight: var(--fw-bold); }
+.lb-mkt { display: inline-flex; align-items: center; gap: 8px; }
+.lb-mkt b { color: var(--color-text-strong); }
+
+/* Every rank is circled in chalk; the top three get their own colour. Long ranks stretch into a pill. */
+.lb-rank {
+  display: inline-grid; place-items: center; box-sizing: border-box; min-width: 26px; height: 26px; padding: 0 5px;
+  border: 1.5px solid currentColor; border-radius: 999px; color: var(--color-chalk-gray);
+  font: var(--fw-bold) var(--fs-14)/1 var(--font-display); font-variant-numeric: tabular-nums;
+}
+:is(.lb-rank--1, .lb-rank--2, .lb-rank--3) { font-size: var(--fs-16); }
+.lb-rank--1 { color: var(--color-chalk-yellow); }
+.lb-rank--2 { color: var(--color-chalk-white); }
+.lb-rank--3 { color: var(--color-chalk-yellow-deep); }
+
+.lb-empty { min-height: 240px; justify-content: center; }
+.lb-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--color-text-secondary); font-size: var(--fs-12); }
+.lb-live { display: inline-flex; align-items: center; gap: 6px; }
+.lb-live i { width: 6px; height: 6px; border-radius: 50%; background: var(--color-live); }
+.lb-notes { display: flex; flex-direction: column; gap: 4px; color: var(--color-text-secondary); font-size: var(--fs-12); }
+.lb-notes p { margin: 0; }
+
+.lb-mob { display: none; }
+.lb-mlist { margin: 0; padding: 0; list-style: none; }
+.lb-mlist li { display: flex; flex-direction: column; gap: 8px; margin-bottom: 2px; padding: 12px 14px; border-radius: var(--radius-sm); background: var(--color-board); font-size: var(--fs-13); }
+.lb-mlist-top { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.lb-mlist-top > b { margin-left: auto; white-space: nowrap; }
+.lb-mlist-kv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px 12px; padding-left: 36px; }
+.lb-mlist-kv > span { display: flex; flex-direction: column; gap: 1px; min-width: 0; font-size: var(--fs-12); white-space: nowrap; }
+.lb-mlist-kv > span > span { overflow-wrap: break-word; white-space: normal; }
+.lb-mlist-kv small { color: var(--color-text-secondary); font-size: var(--fs-11); }
+
+/* Tablet: drop the secondary columns, then switch to the card list. */
+@media (max-width: 1100px) { .lb-table .lb-opt { display: none; } .lb-table { min-width: 720px; } }
+@media (max-width: 900px) { .lb-desk { display: none; } .lb-mob { display: block; } }
+@media (max-width: 760px) {
+  .lb-mode { flex-wrap: wrap; row-gap: 8px; }
+  .lb-card { padding: 10px; border: 0; padding-inline: 0; }
+  .lb-search { flex: 1 1 100%; width: auto; }
+  .lb-pager { margin-left: 0; }
+}
+
+/* Mode tabs and the username action share one row. */
+.lb-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.lb-mode .ui-tab { min-height: 30px; padding: 0 14px; font-size: var(--fs-14); }
